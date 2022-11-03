@@ -1,0 +1,10 @@
+.idea/
+
+products_images/
+
+__pycache__
+
+*.py[cod]
+
+.venv
+venv/

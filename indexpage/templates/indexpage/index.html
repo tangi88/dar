@@ -1,0 +1,28 @@
+{% extends 'indexpage/base.html' %}
+{% load static %}
+
+{% block title %}
+index
+{% endblock %}
+
+{% block body %}
+<div class="container top-container">
+    <div class="row">
+        <div class="col-lg-8 col-lg-offset-2">
+            <h1 class="title">index</h1>
+        </div>
+    </div>
+</div>
+<div class="section-top">
+    <img src="{% static 'img/Auto-Repair-Service.jpg' %}" class="img-responsive">
+</div>
+<div class="section">
+    <div class="container">
+        <div class="row">
+            {% for product in products %}
+                {% include 'indexpage/product_item.html' %}
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endblock %}
