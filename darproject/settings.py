@@ -42,7 +42,8 @@ INSTALLED_APPS = [
     'debug_toolbar',
     'indexpage.apps.IndexpageConfig',
     'products',
-    'orders',
+    'orders.apps.OrderConfig',
+    'rest_framework',
 ]
 
 MIDDLEWARE = [
@@ -134,3 +135,10 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'static', 'media')
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.IsAuthenticated',
+    ],
+}

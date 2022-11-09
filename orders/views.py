@@ -1,8 +1,14 @@
 from django.http import JsonResponse
 from django.shortcuts import render
 from django.contrib.auth.models import User
+from rest_framework import generics, viewsets, mixins
+from rest_framework.response import Response
+from rest_framework.views import APIView
+from rest_framework.viewsets import GenericViewSet
+
 from .models import ProductInBasket, Order, OrderProduct
 from .forms import CheckoutContactForm
+from .serializers import OrderSerializer
 
 
 def basket_adding(request):
@@ -68,3 +74,54 @@ def checkout(request):
             print('no')
     return render(request, 'orders/checkout.html', locals())
 
+
+# class OrderAPIView(APIView):
+#     def get(self, request):
+#         o = Order.objects.all()
+#         return Response({'orders': OrderSerializer(o, many=True).data})
+#
+#     def post(self, request):
+#         serializer = OrderSerializer(data=request.data)
+#         serializer.is_valid(raise_exception=True)
+#         serializer.save()
+#
+#         return Response({'order': serializer.data})
+#         # order_new = Order.objects.create(
+#         #
+#         # )
+#         #
+#         # return Response({'order': OrderSerializer(order_new).data})
+#
+#     def put(self, request, *args, **kwargs):
+#         pk = kwargs.get('pk', None)
+#         if not pk:
+#             return Response({'error': 'Method PUT not allowed'})
+#
+#         try:
+#             instance = Order.objects.get(pk=pk)
+#         except:
+#             return Response({'error': 'Object does not exists'})
+#
+#         serializer = OrderSerializer(data=request.data, instance=instance)
+#         serializer.is_valid(raise_exception=True)
+#         serializer.save()
+#
+#         return Response({'order': serializer.data})
+
+
+# class OrderAPIView(generics.ListAPIView):
+#     queryset = Order.objects.all()
+#     serializer_class = OrderSerializer
+#
+#
+# class OrderAPIUpdate(generics.UpdateAPIView):
+#     queryset = Order.objects.all()
+#     serializer_class = OrderSerializer
+
+class OrderViewSet(mixins.UpdateModelMixin,
+                   mixins.ListModelMixin,
+                   GenericViewSet):
+# class OrderViewSet(viewsets.ModelViewSet):
+
+    queryset = Order.objects.all()
+    serializer_class = OrderSerializer

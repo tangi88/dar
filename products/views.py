@@ -1,5 +1,7 @@
 from django.shortcuts import render
 from products.models import Product
+from .serializers import ProductSerializer
+from rest_framework import generics
 
 
 def product(request, product_id):
@@ -10,4 +12,9 @@ def product(request, product_id):
         session_key = request.session.cycle_key()
 
     return render(request, 'products/product.html', locals())
+
+
+class ProductAPIDetailView(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Product.objects.all()
+    serializer_class = ProductSerializer
 
