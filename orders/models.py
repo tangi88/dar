@@ -14,6 +14,7 @@ class Order(models.Model):
     sum = models.DecimalField(max_digits=15, decimal_places=2, default=0)
     created = models.DateTimeField(auto_now_add=True, auto_now=False)
     updated = models.DateTimeField(auto_now_add=False, auto_now=True)
+    status = models.CharField(max_length=25, blank=True, null=True, default=None)
 
     def __str__(self):
         return 'Order %s' % self.pk
