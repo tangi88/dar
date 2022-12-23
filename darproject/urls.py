@@ -28,9 +28,13 @@ from django.conf.urls.static import static
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('cart/', include('cart.urls', namespace='cart')),
+    path('orders/', include(('orders.urls', 'orders'), namespace='orders')),
     path('', include('indexpage.urls')),
     path('', include('products.urls')),
-    path('', include('orders.urls')),
+    path('', include('services.urls')),
+    path('', include('prices.urls')),
+    path('', include('catalog.urls')),
     path('api/v1/dar-auth/', include('rest_framework.urls')),
     path('api/v1/productlist/', ProductAPIView.as_view()),
     path('api/v1/unitlist/', ProductUnitAPIView.as_view()),

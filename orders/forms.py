@@ -1,8 +1,9 @@
 from django import forms
-from .models import *
+from .models import Order
 
 
-class CheckoutContactForm(forms.Form):
-    name = forms.CharField(required=True)
-    phone = forms.CharField(required=True)
+class OrderCreateForm(forms.ModelForm):
+    class Meta:
+        model = Order
+        fields = ('customer_name', 'customer_phone', 'customer_email', 'comment')
 

@@ -1,5 +1,5 @@
 .idea/
-
+db.sqlite3
 products_images/
 
 __pycache__

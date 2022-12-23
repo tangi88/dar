@@ -1,0 +1,42 @@
+<div class="col-md-6 col-lg-3">
+    <div class="product-item">
+        <div class="text-center">
+            <a class="block-20" href="{% url 'product' product_image.product.id %}"
+                style="background-image: url('{{ product_image.image }}');"></a>
+            <span class="price">
+                <sup>₽</sup>
+                <span class="number">{{ product_image.product.price }}</span>
+            </span>
+            {% if product_image.product.discount %}
+                <div class="discount-container">
+                    <span>{{product_image.product.discount}} %</span>
+                </div>
+            {% endif %}
+            <div class="text">
+                <h3 class="heading">
+                    <a href="{% url 'product' product_image.product.id %}">
+                        {{ product_image.product.name }}
+                    </a>
+                </h3>
+            </div>
+            <div class="pricing-text">
+                <p>
+                    {% if product_image.product.leftover %}
+                        В наличии {{ product_image.product.leftover }}
+                    {% else %}
+                        Нет в наличии
+                    {% endif %}
+                </p>
+            </div>
+            <form class="add-to-cart"
+                  action="{% url 'cart:cart_add' product_image.product.id %}" method="post">
+                {{ cart_add_form.quantity.as_hidden }}
+                {{ cart_add_form.update }}
+                <button type="submit" class="btn btn-primary btn-md btn-block">
+                    В корзину
+                </button>
+                {% csrf_token %}
+            </form>
+        </div>
+    </div>
+</div>

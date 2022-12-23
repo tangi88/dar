@@ -10,7 +10,7 @@ class ProductCategory(models.Model):
 
 
 class ProductUnit(models.Model):
-    code = models.CharField(max_length=25, blank=True, null=True, default=None)
+    code = models.CharField(max_length=25, blank=True, null=True, default=None, db_index=True)
     name = models.CharField(max_length=25, blank=True, null=True, default=None)
     description = models.CharField(max_length=100, blank=True, null=True, default=None)
 

@@ -27,7 +27,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 INTERNAL_IPS = ['127.0.0.1']
-
+CART_SESSION_ID = 'cart'
 
 # Application definition
 
@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'indexpage.apps.IndexpageConfig',
     'products',
     'orders.apps.OrderConfig',
+    'cart',
     'rest_framework',
 ]
 
@@ -71,7 +72,7 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
 
-                'orders.context_processors.getting_basket_info',
+                'cart.context_processors.cart',
             ],
         },
     },

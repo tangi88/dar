@@ -1,19 +1,18 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from products.models import *
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from .serializers import *
 from rest_framework import generics
+from cart.forms import CartAddProductForm
 
 
 def product(request, product_id):
-    product = Product.objects.get(id=product_id)
+    prod = get_object_or_404(Product, id=product_id)
+    cart_add_form = CartAddProductForm(initial={'quantity': 1})
 
-    session_key = request.session.session_key
-    if not session_key:
-        session_key = request.session.cycle_key()
-
-    return render(request, 'products/product.html', locals())
+    return render(request, 'products/product.html', {'product': prod,
+                                                     'cart_add_form': cart_add_form})
 
 
 class ProductAPIView(APIView):

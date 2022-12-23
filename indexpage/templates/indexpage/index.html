@@ -2,27 +2,43 @@
 {% load static %}
 
 {% block title %}
-index
+DAR
 {% endblock %}
 
 {% block body %}
-<div class="container top-container">
-    <div class="row">
-        <div class="col-lg-8 col-lg-offset-2">
-            <h1 class="title">index</h1>
+<div class="hero-wrap">
+    <div class="home-slider owl-carousel owl-loaded owl-drag">
+        <div class="slider-item" style="background-image:url({% static 'img/bg_1.jpg' %});">
+            <div class="overlay"></div>
+            <div class="container">
+                <div class="row no-gutters slider-text align-items-center justify-content-start">
+                    <div class="col-md-6 animated animatedFadeInUp fadeInUp">
+                        <div class="text w-100">
+                            <h2>Лучший автосервис в Долгодеревнском</h2>
+                            <h1 class="mb-4">Ремонт и техническое обслуживание всех марок автомобилей</h1>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="slider-item" style="background-image:url({% static 'img/bg_2.jpg' %});">
+            <div class="overlay"></div>
+            <div class="container">
+                <div class="row no-gutters slider-text align-items-center justify-content-start">
+                    <div class="col-md-6 animated animatedFadeInUp fadeInUp">
+                        <div class="text w-100">
+                            <h2>Запчасти по низким ценам</h2>
+                            <h1 class="mb-4">Закажите запчасти на сайте и получите недорогой ремонт</h1>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </div>
-<div class="section-top">
-    <img src="{% static 'img/Auto-Repair-Service.jpg' %}" class="img-responsive">
-</div>
-<div class="section">
-    <div class="container">
-        <div class="row">
-            {% for product in products %}
-                {% include 'indexpage/product_item.html' %}
-            {% endfor %}
-        </div>
-    </div>
-</div>
+
+{% include 'services/services_base.html' %}
+
+{% include 'prices/prices_base.html' %}
+
 {% endblock %}

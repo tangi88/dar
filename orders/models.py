@@ -6,9 +6,9 @@ from django.contrib.auth.models import User
 
 class Order(models.Model):
     user = models.ForeignKey(User, on_delete=models.DO_NOTHING, blank=True, null=True, default=None)
-    customer_email = models.EmailField(blank=True, null=True, default=None)
-    customer_name = models.CharField(max_length=100, blank=True, null=True, default=None)
-    customer_phone = models.CharField(max_length=48, blank=True, null=True, default=None)
+    customer_email = models.EmailField()
+    customer_name = models.CharField(max_length=100)
+    customer_phone = models.CharField(max_length=48)
     customer_address = models.CharField(max_length=500, blank=True, null=True, default=None)
     comment = models.TextField(blank=True, null=True, default=None)
     sum = models.DecimalField(max_digits=15, decimal_places=2, default=0)
@@ -19,10 +19,10 @@ class Order(models.Model):
     def __str__(self):
         return 'Order %s' % self.pk
 
-    def save(
-        self, force_insert=False, force_update=False, using=None, update_fields=None
-    ):
-        super(Order, self).save()
+    # def save(
+    #     self, force_insert=False, force_update=False, using=None, update_fields=None
+    # ):
+    #     super(Order, self).save()
 
 
 class OrderProduct(models.Model):
@@ -52,22 +52,4 @@ def OrderProduct_post_save(sender, instance, created, **kwargs):
 
 
 post_save.connect(OrderProduct_post_save, sender=OrderProduct)
-
-
-class ProductInBasket(models.Model):
-    session_key = models.CharField(max_length=128, blank=True, null=True, default=None)
-    order = models.ForeignKey(Order, on_delete=models.CASCADE, blank=True, null=True, default=None)
-    product = models.ForeignKey(Product, on_delete=models.DO_NOTHING, blank=True, null=True, default=None)
-    amount = models.IntegerField(default=1)
-    price = models.DecimalField(max_digits=15, decimal_places=2, default=0)
-    discount = models.DecimalField(max_digits=5, decimal_places=2, default=0)
-    sum = models.DecimalField(max_digits=15, decimal_places=2, default=0)
-
-    def save(
-        self, force_insert=False, force_update=False, using=None, update_fields=None
-    ):
-        self.price = self.product.price
-        self.sum = int(self.amount) * self.price
-
-        super(ProductInBasket, self).save()
 
