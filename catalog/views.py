@@ -11,10 +11,10 @@ def catalog(request):
     cart_add_form = CartAddProductForm(initial={'quantity': 1})
 
     for product in products:
-        image = ProductImage.objects.filter(product=product).order_by('-is_main')
-        image_path = image[0].image.url if image.exists() else '/'
+        images = ProductImage.objects.filter(product=product).order_by('-is_main')
+        image = images[0].image if images.exists() else None
 
-        products_images.append({'product': product, 'image': image_path})
+        products_images.append({'product': product, 'image': image})
 
     return render(request, 'catalog/catalog.html', {'products_images': products_images,
                                                     'cart': cart,

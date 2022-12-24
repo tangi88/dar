@@ -1,17 +1,14 @@
+{% load static %}
+
 <div class="col-md-6 col-lg-3">
     <div class="product-item">
         <div class="text-center">
             <a class="block-20" href="{% url 'product' product_image.product.id %}"
-                style="background-image: url('{{ product_image.image }}');"></a>
+                style="background-image: url('{% if product_image.image %}{{ product_image.image.url }}{% else %}{% static 'img/no_image.png' %}{% endif %}');"></a>
             <span class="price">
                 <sup>₽</sup>
                 <span class="number">{{ product_image.product.price }}</span>
             </span>
-            {% if product_image.product.discount %}
-                <div class="discount-container">
-                    <span>{{product_image.product.discount}} %</span>
-                </div>
-            {% endif %}
             <div class="text">
                 <h3 class="heading">
                     <a href="{% url 'product' product_image.product.id %}">

@@ -11,9 +11,13 @@
         <div class="row">
             <div class="col-md-5 mr-auto">
                 <div class="border text-center">
-                    {% for image_item in product.productimage_set.all %}
-                        <img src="{{ image_item.image.url }}" alt="Image" class="img-fluid p-5">
-                    {% endfor %}
+                    {% if images %}
+                        {% for image_item in images %}
+                            <img src="{{ image_item.image.url }}" alt="Image" class="img-fluid p-5">
+                        {% endfor %}
+                    {% else %}
+                        <img src="{% static 'img/no_image.png' %}" alt="Image" class="img-fluid p-5">
+                    {% endif %}
                 </div>
             </div>
             <div class="col-md-6">

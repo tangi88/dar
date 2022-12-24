@@ -10,9 +10,13 @@ from cart.forms import CartAddProductForm
 def product(request, product_id):
     prod = get_object_or_404(Product, id=product_id)
     cart_add_form = CartAddProductForm(initial={'quantity': 1})
+    images = ProductImage.objects.filter(product=prod).order_by('-is_main')
+    if not images.exists():
+        images = None
 
     return render(request, 'products/product.html', {'product': prod,
-                                                     'cart_add_form': cart_add_form})
+                                                     'cart_add_form': cart_add_form,
+                                                     'images': images})
 
 
 class ProductAPIView(APIView):
