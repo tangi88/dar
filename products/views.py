@@ -1,9 +1,8 @@
 from django.shortcuts import render, get_object_or_404
-from products.models import *
+from products.models import Product, ProductImage, ProductCategory, ProductUnit
 from rest_framework.response import Response
 from rest_framework.views import APIView
-from .serializers import *
-from rest_framework import generics
+from .serializers import ProductSerializer, ProductImageSerializer, ProductCategorySerializer, ProductUnitSerializer
 from cart.forms import CartAddProductForm
 
 
@@ -117,11 +116,4 @@ class ProductImageAPIView(APIView):
             data.append({'id_1c': id_1c, 'error': serializer.errors})
 
         return Response({'files': data})
-
-
-# class ProductAPIDetailView(generics.RetrieveUpdateDestroyAPIView):
-#     queryset = Product.objects.all()
-#     serializer_class = ProductSerializer
-
-
 

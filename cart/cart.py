@@ -1,6 +1,6 @@
 from decimal import Decimal
 from django.conf import settings
-from products.models import Product
+from products.models import Product, ProductImage
 
 
 class Cart(object):
@@ -26,7 +26,11 @@ class Cart(object):
 
         cart = self.cart.copy()
         for product in products:
+            images = ProductImage.objects.filter(product=product).order_by('-is_main')
+            image = images[0].image if images.exists() else None
+
             cart[str(product.id)]['product'] = product
+            cart[str(product.id)]['image'] = image
 
         for item in cart.values():
             item['price'] = Decimal(item['price'])

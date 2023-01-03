@@ -1,4 +1,5 @@
 from django.db import models
+from django.urls import reverse
 
 
 class ProductCategory(models.Model):
@@ -32,6 +33,9 @@ class Product(models.Model):
     is_deleted = models.BooleanField(default=False)
     created = models.DateTimeField(auto_now_add=True, auto_now=False)
     updated = models.DateTimeField(auto_now_add=False, auto_now=True)
+
+    def get_absolute_url(self):
+        return reverse('product', args=[self.id])
 
     def __str__(self):
         return self.name

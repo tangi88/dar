@@ -3,7 +3,7 @@
 <div class="col-md-6 col-lg-3">
     <div class="product-item">
         <div class="text-center">
-            <a class="block-20" href="{% url 'product' product_image.product.id %}"
+            <a class="block-20" href="{{ product_image.product.get_absolute_url }}"
                 style="background-image: url('{% if product_image.image %}{{ product_image.image.url }}{% else %}{% static 'img/no_image.png' %}{% endif %}');"></a>
             <span class="price">
                 <sup>₽</sup>
@@ -11,7 +11,7 @@
             </span>
             <div class="text">
                 <h3 class="heading">
-                    <a href="{% url 'product' product_image.product.id %}">
+                    <a href="{{ product_image.product.get_absolute_url }}">
                         {{ product_image.product.name }}
                     </a>
                 </h3>

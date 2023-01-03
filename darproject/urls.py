@@ -16,15 +16,9 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from django.conf import settings
-# from orders.views import OrderViewSet
 from orders.views import *
 from products.views import *
-# from products.views import ProductAPIDetailView
-# from rest_framework import routers
 from django.conf.urls.static import static
-
-# router = routers.SimpleRouter()
-# router.register(r'order', OrderViewSet)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -35,18 +29,13 @@ urlpatterns = [
     path('', include('services.urls')),
     path('', include('prices.urls')),
     path('', include('catalog.urls')),
-    path('api/v1/dar-auth/', include('rest_framework.urls')),
+    path('api/v1/auth/', include('rest_framework.urls')),
     path('api/v1/productlist/', ProductAPIView.as_view()),
     path('api/v1/unitlist/', ProductUnitAPIView.as_view()),
     path('api/v1/categorylist/', ProductCategoryAPIView.as_view()),
     path('api/v1/productimagelist/', ProductImageAPIView.as_view()),
-    # path('api/v1/productlist/<int:pk>/', ProductAPIDetailView.as_view()),
-    # path('api/v1/', include(router.urls)),
-    # path('api/v1/orderlist/', OrderViewSet.as_view({'get': 'list'})),
-    # path('api/v1/orderlist/<int:pk>/', OrderViewSet.as_view({'put': 'update'})),
     path('api/v1/orderlist/<int:pk>/', OrderAPIView.as_view()),
     path('api/v1/orderlist/', OrderAPIView.as_view()),
-    # path('api/v1/orderlist/<int:pk>', OrderAPIView.as_view()),
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

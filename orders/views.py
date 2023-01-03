@@ -1,9 +1,7 @@
 from django.shortcuts import render
 from django.contrib.auth.models import User
-from rest_framework import generics, viewsets, mixins
 from rest_framework.response import Response
 from rest_framework.views import APIView
-from rest_framework.viewsets import GenericViewSet
 from .models import Order, OrderProduct
 from .forms import OrderCreateForm
 from .serializers import OrderSerializer, OrderProductSerializer
@@ -57,20 +55,6 @@ class OrderAPIView(APIView):
 
         return Response({'orders': orders_data})
 
-        # return Response({'orders': OrderSerializer(orders, many=True).data})
-
-    # def post(self, request):
-    #     serializer = OrderSerializer(data=request.data)
-    #     serializer.is_valid(raise_exception=True)
-    #     serializer.save()
-    #
-    #     return Response({'order': serializer.data})
-    #     # order_new = Order.objects.create(
-    #     #
-    #     # )
-    #     #
-    #     # return Response({'order': OrderSerializer(order_new).data})
-
     def put(self, request, *args, **kwargs):
         pk = kwargs.get('pk', None)
         if not pk:
@@ -83,25 +67,6 @@ class OrderAPIView(APIView):
 
         instance.status = 'unloaded'
         instance.save()
-        # serializer = OrderSerializer(data=request.data, instance=instance)
-        # serializer.is_valid(raise_exception=True)
-        # serializer.save()
 
         return Response({'order': 'unloaded'})
 
-
-# class OrderAPIView(generics.ListAPIView):
-#     queryset = Order.objects.all()
-#     serializer_class = OrderSerializer
-#
-#
-# class OrderAPIUpdate(generics.UpdateAPIView):
-#     queryset = Order.objects.all()
-#     serializer_class = OrderSerializer
-
-# class OrderViewSet(mixins.UpdateModelMixin,
-#                    GenericViewSet):
-# # class OrderViewSet(viewsets.ModelViewSet):
-#
-#     queryset = Order.objects.all()
-#     serializer_class = OrderSerializer

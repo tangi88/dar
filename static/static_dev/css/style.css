@@ -1118,6 +1118,15 @@ ul {
   position: relative;
   display: block; }
 
+.block-10 {
+  overflow: hidden;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
+  height: 115px;
+  position: relative;
+  display: block; }
+
 .footer {
   overflow: hidden;
   background: #252525; }

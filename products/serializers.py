@@ -171,9 +171,3 @@ class ProductImageSerializer(serializers.Serializer):
 
         return instance
 
-
-# class ProductSerializer(serializers.ModelSerializer):
-#     class Meta:
-#         model = Product
-#         fields = '__all__'
-

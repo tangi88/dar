@@ -27,7 +27,8 @@
                                 {% with product=item.product %}
                                     <tr>
                                         <td class="product-thumbnail">
-                                            <img src="#" alt="Image" class="img-fluid">
+                                            <a class="block-10" href="{{ product.get_absolute_url }}"
+                                                style="background-image: url('{% if item.image %}{{ item.image.url }}{% else %}{% static 'img/no_image.png' %}{% endif %}');"></a>
                                         </td>
                                         <td class="product-name">
                                             <h2 class="h5 text-black">{{ product.name }}</h2>
@@ -80,7 +81,7 @@
                     <div class="row mb-5">
                         <form action="{% url 'orders:order_create' %}" method="get"
                             class="col-md-6 mb-3 mb-md-0">
-                            <button class="btn btn-primary btn-md btn-block">Оформить заказ</button>
+                            <button class="btn btn-primary btn-md btn-block">Перейти к оформлению</button>
                         </form>
                         <form action="/catalog" class="col-md-6">
                             <button class="btn btn-outline-primary btn-md btn-block">Продолжить покупки</button>
