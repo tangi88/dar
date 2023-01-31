@@ -6,6 +6,7 @@ from .models import Order, OrderProduct
 from .forms import OrderCreateForm
 from .serializers import OrderSerializer, OrderProductSerializer
 from cart.cart import Cart
+from .tasks import order_created
 
 
 def order_create(request):
@@ -23,6 +24,9 @@ def order_create(request):
                                              amount=item['quantity'])
             # очистка корзины
             cart.clear()
+            # запуск асинхронной задачи
+            order_created.delay(order.id)
+
             return render(request, 'orders/order/created.html',
                           {'order': order})
     else:

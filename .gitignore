@@ -1,6 +1,7 @@
 .idea/
 db.sqlite3
 products_images/
+email.ini
 
 __pycache__
 
